@@ -36,5 +36,13 @@ namespace YourProjectName.Controllers
             public string Username { get; set; }
             public string UserPassword { get; set; }
         }
+
+        [HttpGet("user/{id}")]
+        public ActionResult GetUser(int id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.UserId == id);
+            if (user == null) return NotFound();
+            return Ok(new { username = user.Username });
+        }
     }
 }

@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Учёт книг - Авторизация</title>
+    <style>
+        button {
+            padding: 10px 20px;
+            transition: transform 0.2s;
+        }
+
+            button:hover {
+                transform: scale(1.05);
+            }
+    </style>
 </head>
 <body>
     <h1>Вход в систему</h1>
     <form id="loginForm">
         <label for="username">Имя пользователя:</label><br>
-        <input type="text" id="username" name="username"><br>
+        <input type="text" id="username" name="username" autofocus><br>
         <label for="password">Пароль:</label><br>
         <input type="password" id="password" name="password"><br><br>
         <button type="submit">Войти</button>

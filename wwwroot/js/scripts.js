@@ -4,7 +4,7 @@
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    fetch("https://localhost:7207/api/auth/login", {
+    fetch("/api/auth/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -22,8 +22,18 @@
         })
         .then(data => {
             document.getElementById("message").innerText = data.message + " (ID: " + data.userId + ")";
+            document.cookie = "userId=" + data.userId + "; path=/";
+            window.location.href = "/cabinet.html";
         })
         .catch(error => {
             document.getElementById("message").innerText = error.message;
         });
+});
+
+// Добавляем Enter для поля пароля
+document.getElementById("password").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Предотвращаем лишние действия
+        document.getElementById("loginForm").dispatchEvent(new Event("submit")); // Запускаем submit
+    }
 });
