@@ -3,11 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <title>Кабинет пользователя</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        input, button {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover {
+                color: black;
+                cursor: pointer;
+            }
+    </style>
 </head>
 <body>
     <h1>Добро пожаловать, <span id="username"></span>!</h1>
-    <p>Тут будет информация о книгах.</p>
+    <h2>Мои книги</h2>
+    <ul id="bookList"></ul>
+    <button onclick="openModal()">Добавить книгу</button>
+    <p id="message"></p>
     <button id="logout">Выйти</button>
+
+    <!-- Модальное окно -->
+    <div id="addBookModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Добавить книгу</h3>
+            <form id="addBookForm">
+                <label for="title">Название:</label><br>
+                <input type="text" id="title" name="title"><br>
+                <label for="author">ФИО автора:</label><br>
+                <input type="text" id="author" name="author"><br>
+                <label for="readDate">Дата прочтения:</label><br>
+                <input type="date" id="readDate" name="readDate"><br>
+                <label>Эра:</label><br>
+                <input type="radio" id="eraAD" name="era" value="AD" checked>
+                <label for="eraAD">AD</label>
+                <input type="radio" id="eraBC" name="era" value="BC">
+                <label for="eraBC">BC</label><br>
+                <label for="note">Заметка:</label><br>
+                <textarea id="note" name="note"></textarea><br>
+                <button type="submit">Добавить</button>
+                <button type="button" onclick="closeModal()">Отменить</button>
+            </form>
+        </div>
+    </div>
+
     <script src="/js/cabinet.js"></script>
 </body>
 </html>

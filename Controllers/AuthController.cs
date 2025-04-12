@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace YourProjectName.Controllers
+namespace book_diplom2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

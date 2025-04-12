@@ -2,20 +2,36 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Учёт книг - Авторизация</title>
+    <title>Авторизация</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        input, button {
+            padding: 8px;
+            margin: 5px;
+        }
+
         button {
-            padding: 10px 20px;
-            transition: transform 0.2s;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
 
             button:hover {
-                transform: scale(1.05);
+                background-color: #45a049;
             }
     </style>
 </head>
 <body>
-    <h1>Вход в систему</h1>
+    <h1>Авторизация</h1>
     <form id="loginForm">
         <label for="username">Имя пользователя:</label><br>
         <input type="text" id="username" name="username" autofocus><br>
