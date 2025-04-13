@@ -33,20 +33,20 @@ app.UseCors("AllowAll");
 
 // Настраиваем маршруты
 app.UseRouting();
-app.UseEndpoints(endpoints =>
+
+// Заменяем MapControllers и MapGet
+app.MapControllers();
+app.MapGet("/", async context =>
 {
-    endpoints.MapControllers();
-    endpoints.MapGet("/", async context =>
+    if (!context.Request.IsHttps)
     {
-        context.Response.Redirect("/index.html");
-    });
+        var httpsUrl = $"https://{context.Request.Host}/index.html";
+        context.Response.Redirect(httpsUrl);
+        return;
+    }
+    context.Response.Redirect("/index.html");
 });
 
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.Append("Content-Type", "application/json; charset=utf-8");
-    await next();
-});
 // Для отключения кэша
 app.UseStaticFiles(new StaticFileOptions
 {
@@ -57,10 +57,5 @@ app.UseStaticFiles(new StaticFileOptions
         ctx.Context.Response.Headers.Append("Expires", "0");
     }
 });
-//app.Use(async (context, next) =>
-//{
-//    context.Response.Headers.Append("Content-Type", "application/json; charset=utf-8");
-//    await next();
-//});
 
 app.Run();

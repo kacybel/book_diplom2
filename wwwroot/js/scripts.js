@@ -22,7 +22,7 @@
         })
         .then(data => {
             document.getElementById("message").innerText = data.message + " (ID: " + data.userId + ")";
-            document.cookie = "userId=" + data.userId + "; path=/";
+            document.cookie = `userId=${data.userId}; path=/; SameSite=None; Secure`;
             window.location.href = "/cabinet.html";
         })
         .catch(error => {

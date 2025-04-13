@@ -23,7 +23,6 @@ public class BooksController : ControllerBase
                 b => b.BookId,
                 (ub, b) => new { b.Title, b.Note, ub.RatingValue })
             .ToList();
-        //Response.ContentType = "application/json; charset=utf-8";
         return Ok(books);
     }
 

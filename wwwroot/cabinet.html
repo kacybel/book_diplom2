@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Кабинет пользователя</title>
     <style>
         body {
@@ -13,14 +14,25 @@
             color: #4CAF50;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
         }
 
-        li {
+        th, td {
             padding: 10px;
-            border-bottom: 1px solid #ddd;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
 
         input, button {
@@ -75,15 +87,23 @@
 <body>
     <h1>Добро пожаловать, <span id="username"></span>!</h1>
     <h2>Мои книги</h2>
-    <ul id="bookList"></ul>
+    <table id="bookTable">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Заметка</th>
+                <th>Оценка</th>
+            </tr>
+        </thead>
+        <tbody id="bookList"></tbody>
+    </table>
     <button onclick="openModal()">Добавить книгу</button>
     <p id="message"></p>
     <button id="logout">Выйти</button>
 
-    <!-- Модальное окно -->
     <div id="addBookModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal()">×</span>
             <h3>Добавить книгу</h3>
             <form id="addBookForm">
                 <label for="title">Название:</label><br>
@@ -92,11 +112,13 @@
                 <input type="text" id="author" name="author"><br>
                 <label for="readDate">Дата прочтения:</label><br>
                 <input type="date" id="readDate" name="readDate"><br>
-                <label>Эра:</label><br>
-                <input type="radio" id="eraAD" name="era" value="AD" checked>
-                <label for="eraAD">AD</label>
-                <input type="radio" id="eraBC" name="era" value="BC">
-                <label for="eraBC">BC</label><br>
+                <fieldset>
+                    <legend>Эра:</legend>
+                    <input type="radio" id="eraAD" name="era" value="AD" checked>
+                    <label for="eraAD">AD</label>
+                    <input type="radio" id="eraBC" name="era" value="BC">
+                    <label for="eraBC">BC</label>
+                </fieldset><br>
                 <label for="note">Заметка:</label><br>
                 <textarea id="note" name="note"></textarea><br>
                 <button type="submit">Добавить</button>

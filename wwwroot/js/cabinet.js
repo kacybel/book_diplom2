@@ -9,20 +9,39 @@ if (!userId) {
         .then(response => response.json())
         .then(data => {
             document.getElementById("username").textContent = data.username;
-        });
+        })
+        .catch(error => console.error("Ошибка загрузки имени:", error));
 
-    fetch(`/api/books?userId=${userId}`)
-        .then(response => response.json())
+    fetch(`/api/books?userId=${userId}`, {
+        headers: {
+            'Accept': 'application/json; charset=utf-8'
+        }
+    })
+        .then(response => {
+            console.log("Статус ответа:", response.status);
+            return response.json();
+        })
         .then(books => {
+            console.log("Получено:", books);
             const bookList = document.getElementById("bookList");
             bookList.innerHTML = '';
             books.forEach(book => {
-                const li = document.createElement("li");
-                li.textContent = `${book.title} (Заметка: ${book.note || 'нет'}, Рейтинг: ${book.ratingValue || 'не указан'})`;
-                bookList.appendChild(li);
+                console.log("Обрабатываем книгу:", book);
+                const tr = document.createElement("tr");
+                const titleCell = document.createElement("td");
+                titleCell.textContent = book.title || 'без названия';
+                const noteCell = document.createElement("td");
+                noteCell.textContent = book.note || 'нет';
+                const ratingCell = document.createElement("td");
+                ratingCell.textContent = book.ratingValue || 'не указана';
+                tr.appendChild(titleCell);
+                tr.appendChild(noteCell);
+                tr.appendChild(ratingCell);
+                bookList.appendChild(tr);
             });
         })
         .catch(error => {
+            console.error("Ошибка загрузки книг:", error);
             document.getElementById("message").textContent = "Ошибка загрузки книг: " + error.message;
         });
 
@@ -39,6 +58,8 @@ if (!userId) {
             document.getElementById("message").textContent = "Введите название";
             return;
         }
+
+        console.log("Отправляем:", { title, note, userId: parseInt(userId) });
 
         fetch("/api/books", {
             method: "POST",
